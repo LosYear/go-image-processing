@@ -113,7 +113,7 @@ func votingRoutine(wg *sync.WaitGroup, img draw.Image, votes *[][]uint32, longes
 	}
 }
 
-func HoughTransform(img draw.Image, threshold int, maximumLines int) []DetectedLineParams {
+func HoughLineTransform(img draw.Image, threshold int, maximumLines int) []DetectedLineParams {
 	start := time.Now()
 
 	bounds := img.Bounds()
