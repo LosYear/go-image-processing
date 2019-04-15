@@ -1,8 +1,8 @@
-package houghtransform
+package visualization
 
 import (
-	"./circle"
-	"./line"
+	"../circle"
+	"../line"
 	"github.com/llgcode/draw2d/draw2dimg"
 	"image"
 	"image/color"
@@ -50,14 +50,17 @@ func DrawHoughCirclesSet(img draw.Image, params []circle.DetectedCircleParams) d
 	gc := draw2dimg.NewGraphicContext(result)
 	gc.SetFillColor(color.RGBA{255, 0, 0, 255})
 	gc.SetStrokeColor(color.RGBA{255, 0, 0, 255})
-	gc.SetLineWidth(3)
+	gc.SetLineWidth(2)
 
 	gc.BeginPath()
 
 	for _, p := range params {
+		xc := float64(p.A)
+		yc := float64(p.B)
+		r := float64(p.Radius)
 
-		gc.MoveTo(float64(p.A), float64(p.B))
-		gc.LineTo(float64(p.A-p.Radius), float64(p.B))
+		gc.MoveTo(xc+r, yc)
+		gc.ArcTo(xc, yc, r, r, 0, 2*math.Pi)
 		gc.Stroke()
 	}
 
