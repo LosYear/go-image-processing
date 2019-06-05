@@ -4,15 +4,11 @@ import (
 	"../baseimage"
 	"image/color"
 	"image/draw"
-	"log"
-	"time"
 )
 
 func Rotate(img draw.Image, startX, endX, startY, endY, angle int) draw.Image {
-	start := time.Now()
-
 	data := baseimage.SliceGrayscaleRegion(img, startX, endX, startY, endY)
-	img = baseimage.FillRegionWithColor(img, color.RGBA{255, 0, 0, 255}, startX, endX, startY, endY)
+	img = baseimage.FillRegionWithColor(img, color.RGBA{255, 255, 255, 255}, startX, endX, startY, endY)
 
 	centerX := startX + (endX-startX)/2
 	centerY := startY + (endY-startY)/2
@@ -43,8 +39,6 @@ func Rotate(img draw.Image, startX, endX, startY, endY, angle int) draw.Image {
 			img.Set(column, row, clr)
 		}
 	}
-
-	log.Println("Rotate:", time.Since(start))
 
 	return img
 }
